@@ -59,4 +59,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function commodities()
+    {
+    return $this->hasMany(Commodity::class);
+    }
 }
