@@ -1,6 +1,6 @@
 <x-guest-layout>
     <x-jet-authentication-card>
-    <h2 class="text-center font-medium text-gray-700 mb-4">学生ユーザー登録</h2>
+    <h2 class="text-center font-medium text-gray-700 mb-4">ユーザー登録</h2>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
         </x-slot>

@@ -25,8 +25,10 @@ class CreateCommoditiesTable extends Migration
                 ->cascadeOnDelete();
             $table->string('title');
             $table->text('description');
-            $table->date('due_date');
-            $table->boolean('is_published')->default(1);
+            $table->integer('price');
+            $table->string('image');
+            // $table->date('due_date');
+            // $table->boolean('is_published')->default(1);
             $table->timestamps();
         });
     }

@@ -133,4 +133,11 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+        'attributes'           => [
+        'title' => 'タイトル',
+        'faculty_id' => '学部',
+        'description' => '商品説明',
+        'price' => '値段',
+        'img' => '写真',
+    ],
 ];
