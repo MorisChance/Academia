@@ -27,8 +27,6 @@ class CreateCommoditiesTable extends Migration
             $table->text('description');
             $table->integer('price');
             $table->string('image');
-            // $table->date('due_date');
-            // $table->boolean('is_published')->default(1);
             $table->timestamps();
         });
     }

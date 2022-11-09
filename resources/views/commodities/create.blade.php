@@ -4,7 +4,7 @@
 
         <x-validation-errors :errors="$errors" />
 
-        <form action="{{ route('commodities.store') }}" method="POST" class="rounded pt-3 pb-8 mb-4">
+        <form action="{{ route('commodities.store') }}" method="POST" enctype="multipart/form-data" class="rounded pt-3 pb-8 mb-4">
             @csrf
             <div class="mb-4">
                 <label class="block text-white mb-2" for="title">
@@ -42,7 +42,7 @@
                     値段
                 </label>
                 <input type="string" name="price" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-pink-600 w-half py-2 px-3"
-                required placeholder="値段" value="{{ old('値段') }}">
+                required placeholder="値段" value="{{ old('price') }}">
             </div>
             {{-- 写真アップロード機能 --}}
             {{-- イメージは、commodityコントローラーで別に処理を書く --}}
