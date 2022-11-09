@@ -45,7 +45,6 @@ class CommodityController extends Controller
 
         // $request->user()->idでログインユーザーのIDを取得してuser_id属性に代入する
         $commodity->user_id = $request->user()->id;
-        
         // fileメソッドの引数は、画像ファイル用のinputタグのname属性を指定でアップロードする画像の情報を受け取る
         $file = $request->file('image');
         // $file->getClientOriginalName()で画像ファイルの名前を受け取り、YYYYMMDDhhmmss_ファイル名のファイル名を求めてimage属性に代入する
@@ -68,7 +67,7 @@ class CommodityController extends Controller
             return back()->withInput()->withErrors($e->getMessage());
         }
         $commodity->image = date('YmdHis') . '_' . $file->getClientOriginalName();
-        return redirect()->route('commoditis.show', $commodity);
+        return redirect()->route('commodities.show', $commodity);
     }
 
     /**
@@ -79,7 +78,7 @@ class CommodityController extends Controller
      */
     public function show(Commodity $commodity)
     {
-        //
+    return view('commodities.show', compact('commodity'));
     }
 
     /**
