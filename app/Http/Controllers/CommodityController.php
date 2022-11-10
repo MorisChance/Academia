@@ -54,7 +54,7 @@ class CommodityController extends Controller
         try {
             // 登録
             $commodity->save();
-            // 画像アップロード
+            // Storage::putFileAs(保存先のパス, アップロードするファイル, アップロード後のファイル名)
             if (!Storage::putFileAs('images/commdities', $file, $commodity->image)) {
                 // 例外を投げてロールバックさせる
                 throw new \Exception('画像ファイルの保存に失敗しました。');

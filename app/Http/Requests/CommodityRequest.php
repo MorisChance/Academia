@@ -28,7 +28,7 @@ class CommodityRequest extends FormRequest
             'faculty_id' => 'required|exists:faculties,id',
             'description' => 'required|string|max:2000',
             'price' => 'required|integer',
-            'image'=>'required',
+            'image'=>'required|file|image|mimes:jpg,png',
         ];
     }
 }
