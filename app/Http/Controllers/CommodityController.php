@@ -6,6 +6,7 @@ use App\Http\Requests\CommodityRequest;
 use App\Models\Commodity;
 use App\Models\Faculty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -114,9 +115,44 @@ class CommodityController extends Controller
      */
     public function update(Request $request, Commodity $commodity)
     {
-        
+        if ($request->user()->cannot('update', $commodity)) {
+            return redirect()->route('commodities.show', $commodity)
+                ->withErrors('自分の商品以外登録はできません');
+        }
+        $file = $request->file('image');
+        if ($file) {
+        $delete_file_path = $commodity->image_path;
+        $commodity->image = date('YmdHis') . '_' . $file->getClientOriginalName();
+        }
+        $commodity->fill($request->all());        
+        // トランザクション開始
+        DB::beginTransaction();
+        try {
+            // 更新
+            $commodity->save();
+            if ($file) {
+                // 画像アップロード
+                if (!Storage::putFileAs('images/commodities', $file, $commodity->image)) {
+                    // 例外を投げてロールバックさせる
+                    throw new \Exception('画像ファイルの保存に失敗しました。');
+                }              // 画像削除
+                if (!Storage::delete($delete_file_path)) {
+                    //アップロードした画像を削除する
+                    Storage::delete($commodity->image_path);
+                    //例外を投げてロールバックさせる
+                    throw new \Exception('画像ファイルの削除に失敗しました。');
+                }
+            }
+            // トランザクション終了(成功)
+            DB::commit();
+        } catch (\Exception $e) {
+            // トランザクション終了(失敗)
+            DB::rollback();
+            return back()->withInput()->withErrors($e->getMessage());
+        }
+        return redirect()->route('commodities.show', $commodity)
+            ->with('notice', '商品を更新しました');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -125,6 +161,27 @@ class CommodityController extends Controller
      */
     public function destroy(Commodity $commodity)
     {
-        
+
+        // トランザクション開始
+        DB::beginTransaction();
+        try {
+            $commodity->delete();
+
+            // 画像削除
+            if (!Storage::delete($commodity->image_path)) {
+                // 例外を投げてロールバックさせる
+                throw new \Exception('画像ファイルの削除に失敗しました。');
+            }
+
+            // トランザクション終了(成功)
+            DB::commit();
+        } catch (\Exception $e) {
+            // トランザクション終了(失敗)
+            DB::rollback();
+            return back()->withInput()->withErrors($e->getMessage());
+        }
+
+        return redirect()->route('commodities.index')
+            ->with('notice', '商品を削除しました');
     }
 }

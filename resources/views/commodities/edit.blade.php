@@ -5,7 +5,7 @@
         <x-validation-errors :errors="$errors" />
 
         <form action="{{ route('commodities.update', $commodity) }}" method="POST"
-            class="rounded pt-3 pb-8 mb-4">
+            class="rounded pt-3 pb-8 mb-4" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-4">
