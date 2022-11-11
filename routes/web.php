@@ -12,10 +12,19 @@ use App\Http\Controllers\CommodityController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//同じルーティングがある場合が下が優先される
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+Route::get('/', [CommodityController::class, 'index'])
+    ->middleware('auth')
+    ->name('root');
+    
+
+Route::get('/welcome', function () {
+    return view('welcome');
+})->middleware('guest')
+    ->name('welcome');
 
 Route::middleware([
     'auth:sanctum',

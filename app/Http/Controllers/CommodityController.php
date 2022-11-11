@@ -16,9 +16,16 @@ class CommodityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+       //indexアクションにRequestクラスの引数を追加
+        $params = $request->query();
+
+       //検索用のスコープ(scopeSearch)を追加するので、スコープにリクエストパラメーターを渡す,with([user, faculty])とすることによりN+1問題解決
+        $commodities = Commodity::search($params)->with(['user', 'faculty'])->latest()->paginate(5);
+        $commodities->appends($params);
+        $faculties = Faculty::all();
+        return view('commodities.index', compact('commodities', 'faculties'));
     }
 
     /**
@@ -45,17 +52,20 @@ class CommodityController extends Controller
 
         // $request->user()->idでログインユーザーのIDを取得してuser_id属性に代入する
         $commodity->user_id = $request->user()->id;
+
         // fileメソッドの引数は、画像ファイル用のinputタグのname属性を指定でアップロードする画像の情報を受け取る
         $file = $request->file('image');
+
         // $file->getClientOriginalName()で画像ファイルの名前を受け取り、YYYYMMDDhhmmss_ファイル名のファイル名を求めてimage属性に代入する
         $commodity->image = date('YmdHis') . '_' . $file->getClientOriginalName();
+
         // トランザクション開始
         DB::beginTransaction();
         try {
             // 登録
             $commodity->save();
             // Storage::putFileAs(保存先のパス, アップロードするファイル, アップロード後のファイル名)
-            if (!Storage::putFileAs('images/commdities', $file, $commodity->image)) {
+            if (!Storage::putFileAs('images/commodities', $file, $commodity->image)) {
                 // 例外を投げてロールバックさせる
                 throw new \Exception('画像ファイルの保存に失敗しました。');
             }
@@ -66,8 +76,9 @@ class CommodityController extends Controller
             DB::rollback();
             return back()->withInput()->withErrors($e->getMessage());
         }
-        $commodity->image = date('YmdHis') . '_' . $file->getClientOriginalName();
-        return redirect()->route('commodities.show', $commodity);
+        return redirect()
+            ->route('commodities.show', $commodity)
+            ->with('notice', '商品を登録しました');
     }
 
     /**
@@ -78,7 +89,8 @@ class CommodityController extends Controller
      */
     public function show(Commodity $commodity)
     {
-    return view('commodities.show', compact('commodity'));
+
+        return view('commodities.show', compact('commodity'));
     }
 
     /**
@@ -89,7 +101,8 @@ class CommodityController extends Controller
      */
     public function edit(Commodity $commodity)
     {
-        //
+        $faculties = Faculty::all();
+        return view('commodities.edit', compact('faculties', 'commodity'));
     }
 
     /**
@@ -101,7 +114,7 @@ class CommodityController extends Controller
      */
     public function update(Request $request, Commodity $commodity)
     {
-        //
+        
     }
 
     /**
@@ -112,6 +125,6 @@ class CommodityController extends Controller
      */
     public function destroy(Commodity $commodity)
     {
-        //
+        
     }
 }
