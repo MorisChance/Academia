@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class Commodity extends Model
@@ -24,6 +25,12 @@ class Commodity extends Model
     {
         return $this->belongsTo(Faculty::class);
     }
+    public function purchases(){
+        return $this->hasMany(Purchase::class);
+    }
+    public function comments(){
+    return $this->hasMany(Comment::class);
+    }
     public function getImagePathAttribute()
     {
         return 'images/commodities/' . $this->image;
@@ -41,4 +48,13 @@ class Commodity extends Model
         }
         return $query;
     }
+    public function scopeMyCommodity(Builder $query, $params)
+    {
+        if (Auth::user()) {
+            $query->latest()
+            ->with(['faculty'])
+                //->where('user_id', Auth::user()->user_id)ゆーざーのユーザーIDとなっていたため、反応しなかった。
+            ->where('user_id', Auth::user()->id);
+    }
+}
 }

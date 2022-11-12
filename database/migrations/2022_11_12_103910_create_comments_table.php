@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessagesTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,17 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            // messageable_typeとmessageable_idのカラムを生成する
-            $table->morphs('messageable');
+            $table->text('body');
             $table->foreignId('user_id')
                 ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->text('message');
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignId('commodity_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -33,6 +35,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('comments');
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
+use App\Http\Controllers\UserController;
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -63,4 +63,11 @@ class User extends Authenticatable
     {
     return $this->hasMany(Commodity::class);
     }
+    public function purchases(){
+    return $this->hasMany(Purchase::class);
+    }
+    public function comments(){
+    return $this->hasMany(Comment::class);
+    }
 }
+

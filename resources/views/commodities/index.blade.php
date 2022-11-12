@@ -48,7 +48,7 @@
                                 <div>
                                     <a href="{{ route('commodities.show', $c) }}" 
                                         class="flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600 hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 mt-4 px-5 py-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
-                                        more
+                                        詳細
                                     </a>
                                 </div>
                             </div>

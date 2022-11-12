@@ -90,8 +90,10 @@ class CommodityController extends Controller
      */
     public function show(Commodity $commodity)
     {
-
-        return view('commodities.show', compact('commodity'));
+            $purchase = !isset(Auth::user()->commodity)
+            ? $commodity->purchases()->firstWhere('user_id', Auth::user()->id)
+            : '';
+        return view('commodities.show', compact('commodity', 'purchase'));
     }
 
     /**
