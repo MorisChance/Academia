@@ -3,7 +3,7 @@
         <h2 class="text-center text-lg text-white font-bold pt-6 tracking-widest">商品登録</h2>
 
         <x-validation-errors :errors="$errors" />
-
+        {{-- formタグやaタグで="{{ route('commodities.store') }}"とする場合、nameの方を記載する。パラメーターが必要であれば渡す！！ --}}
         <form action="{{ route('commodities.store') }}" method="POST" enctype="multipart/form-data" class="rounded pt-3 pb-8 mb-4">
             @csrf
             <div class="mb-4">

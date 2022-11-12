@@ -31,7 +31,7 @@
             destroy	delete --}}
         @can('view', $commodity)
             <div>
-                <a href="{{ route('commodities.edit', $commodity) }}"
+            <a href="{{ route('commodities.purchases.create', $commodity) }}"
                     class="bg-gradient-to-r from-indigo-500 to-blue-600 hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500 w-full sm:w-32 sm:mr-2 mb-2 sm:mb-0">購入</a>
             </div>
         @endcan
@@ -52,8 +52,33 @@
         @auth
             <hr class="my-4">
             <div class="flex justify-end">
-                <a href="{{ route('commodities.comments.create', $commodity) }}" class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline block">コメント登録</a>
+                <a href="{{ route('commodities.comments.create', $commodity) }}"
+                    class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline block">コメント登録</a>
             </div>
         @endauth
+        <section class="font-sans break-normal text-gray-900 ">
+            @foreach ($comments as $comment)
+                <div class="my-2">
+                    <span class="font-bold mr-3">{{ $comment->user->name }}</span>
+                    <span class="text-sm">{{ $comment->created_at }}</span>
+                    <p>{!! nl2br(e($comment->body)) !!}</p>
+                    <div class="flex justify-end text-center">
+                        @can('update', $comment)
+                            <a href="{{ route('commodities.comments.edit', [$commodity, $comment]) }}"
+                                class="text-sm bg-green-400 hover:bg-green-600 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline w-20 mr-2">編集</a>
+                        @endcan
+                        @can('delete', $comment)
+                            <form action="{{ route('commodities.comments.destroy', [$commodity, $comment]) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" value="削除" onclick="if(!confirm('削除しますか？')){return false};"
+                                    class="text-sm bg-red-400 hover:bg-red-600 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline w-20">
+                            </form>
+                        @endcan
+                    </div>
+                </div>
+                <hr>
+            @endforeach
+        </section>
     </div>
 </x-app-layout>

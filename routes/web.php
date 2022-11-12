@@ -42,12 +42,14 @@ Route::get('/welcome', function () {
 Route::resource('commodities', CommodityController::class)
     ->middleware('auth');
 
-Route::resource('commodities.purchases', PurchaseController::class)
-    ->only(['store', 'destroy', 'show']);
 
 Route::get('/dashboard', [UserController::class, 'dashboard'])
     ->name('dashboard')->middleware('auth');
 
 Route::resource('commodities.comments', CommentController::class)
-    ->only(['create', 'store', 'edit','update', 'destory'])
+    ->only(['create', 'store', 'edit','update', 'destroy'])
+    ->middleware('auth');
+
+Route::resource('commodities.purchases', PurchaseController::class)
+    ->only(['create', 'store','show'])
     ->middleware('auth');

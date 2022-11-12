@@ -15,6 +15,8 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+            $table->string('credit');
+            $table->string('security');
             $table->foreignId('commodity_id')
                 ->constrained()
                 ->cascadeOnUpdate()

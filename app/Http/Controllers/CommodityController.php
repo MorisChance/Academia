@@ -90,10 +90,9 @@ class CommodityController extends Controller
      */
     public function show(Commodity $commodity)
     {
-            $purchase = !isset(Auth::user()->commodity)
-            ? $commodity->purchases()->firstWhere('user_id', Auth::user()->id)
-            : '';
-        return view('commodities.show', compact('commodity', 'purchase'));
+            //リレーションを設定しているため、$commodity->commentsでコメントが取得できる。
+            $comments = $commodity->comments()->latest()->get()->load(['user']);
+            return view('commodities.show', compact('commodity','comments'));
     }
 
     /**

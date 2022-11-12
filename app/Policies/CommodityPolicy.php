@@ -28,6 +28,7 @@ class CommodityPolicy
      * @param  \App\Models\JobOffer  $job_offer
      * @return \Illuminate\Auth\Access\Response|bool
      */
+    //ユーザーと商品を投稿する人が一致していれば、編集と投稿ボタンを見せる
     public function update(User $user, Commodity $commodity)
     {
         return $user->id === $commodity->user_id;
@@ -36,11 +37,12 @@ class CommodityPolicy
     public function delete(User $user, Commodity $commodity)
     {
         return $user->id === $commodity->user_id;
-    }
 
+    }
+    
+    //買う人と売る人が一致していなれば、購入ボタンを見せる
     public function view(User $user, Commodity $commodity)
     {
         return !($user->id === $commodity->user_id);
-        // return $user->id === $purchase->commodity->user_id;
     }
 }

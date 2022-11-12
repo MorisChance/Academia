@@ -27,6 +27,7 @@ class CommentRequest extends FormRequest
             'body' => 'required|string|max:200',
         ];
     }
+    //同じカラム名でも、モデル毎に呼び名を変更したい場合は、各モデルのフォームリクエストにattributesメソッドを追加して上書きします。
     public function attributes()
     {
         return [
