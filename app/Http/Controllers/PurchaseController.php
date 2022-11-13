@@ -45,6 +45,7 @@ class PurchaseController extends Controller
 
     public function show(Commodity $commodity, Purchase $purchase)
     {
+    //storeアクションで$commodityと$purchaseを送っているので使わなくても受け取らなければならない。
         return view('purchases.show', compact('purchase'));
     }
 }

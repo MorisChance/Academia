@@ -18,10 +18,11 @@ class PurchasePolicy
      */
     public function __construct()
     {
+    //
     }
     
         public function viewAny(User $user, Commodity $commodity, Purchase $purchase )
     {
-        return $purchase->user_id===$commodity->user_id;
+    
     }
 }
