@@ -15,18 +15,19 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string('credit');
-            $table->string('security');
-            $table->foreignId('commodity_id')
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
             $table->foreignId('user_id')
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->timestamps();
+            $table->foreignId('commodity_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->string('credit');
+            $table->string('security');
+            $table->integer('price');
             $table->unique(['commodity_id', 'user_id']);
+            $table->timestamps();
         });
     }
 

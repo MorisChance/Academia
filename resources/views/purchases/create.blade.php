@@ -38,7 +38,7 @@
                 </label>
                 <input type="string" name="price"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-pink-600 w-half py-2 px-3"
-                    required placeholder="値段" value="{{ old('price', $commodity->price) }}円">
+                    required placeholder="値段" value="{{ old('price', $commodity->price) }}">
             </div>
             <input type="submit" value="決済"
                 class="w-full flex justify-center bg-gradient-to-r from-pink-500 to-purple-600 hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
