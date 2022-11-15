@@ -22,7 +22,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="w-full">
+            <div class="container max-w-7xl mx-auto px-4 md:px-12 pb-3 mt-3">
                 @foreach ($commodities as $c)
                     <div class="bg-white w-full px-10 py-8 hover:shadow-2xl transition duration-500">
                         <div class="mt-4">

@@ -1936,17 +1936,13 @@ select {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
 }
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
-}
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
 }
 .font-medium {
   font-weight: 500;
@@ -2624,9 +2620,9 @@ select {
     line-height: 1;
   }
 
-  .sm\:text-sm {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+  .sm\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 }
 @media (min-width: 768px) {
@@ -2709,6 +2705,11 @@ select {
 
   .md\:p-10 {
     padding: 2.5rem;
+  }
+
+  .md\:px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   .md\:text-4xl {
