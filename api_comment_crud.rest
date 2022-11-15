@@ -1,0 +1,44 @@
+@host = localhost
+
+### commodities.comments.show
+# @prompt commodity_id
+# @prompt comment_id
+GET /api/commodities/{{ commodity_id }}/comments/{{ comment_id }} HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+
+
+
+### commodities.comments.store
+# @prompt commodity_id
+commodities/api/commodities/{{ commodity_id }}/comments HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "body": "test_comment"
+}
+
+
+
+### commodities.comments.update
+# @prompt commoditie_id
+# @prompt comment_id
+PUT /api/commodities/{{ commodity_id }}/comments/{{ comment_id }} HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "body": "update_comment"
+}
+
+
+
+### commodities.comments.destroy
+# @prompt commoditie_id
+# @prompt comment_id
+DELETE /api/commodities/{{ commodity_id }}/comments/{{ comment_id }} HTTP/1.1
+Host: {{ host }}
+Accept: application/json

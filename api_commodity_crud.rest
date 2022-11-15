@@ -1,0 +1,98 @@
+@host = localhost
+
+### index
+GET /api/commodities HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+
+
+### show
+# @prompt commodity_id
+GET /api/commodities/{{ commodity_id }}?perPage=20&page=1 HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+
+
+
+### store
+# @prompt file
+POST /api/commodities HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+Content-Type: multipart/form-data; boundary=----storeForm
+# boundatyは送信するデータの目印
+
+------storeForm
+Content-Disposition: form-data; name="user_id"
+
+1
+------storeForm
+Content-Disposition: form-data; name="faculty_id"
+
+1
+------storeForm
+Content-Disposition: form-data; name="title"
+
+Test タイトル
+------storeForm
+Content-Disposition: form-data; name="description"
+
+Test 本文
+------storeForm
+Content-Disposition: form-data; name="price"
+
+100
+------storeForm
+Content-Disposition: form-data; name="image"; filename="file.jpg"
+
+< {{ file }}
+------storeForm--
+
+
+
+### update
+# @prompt file
+POST /api/commodities/9 HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+Content-Type: multipart/form-data; boundary=----updateForm
+# boundatyは送信するデータの目印
+
+------updateForm
+Content-Disposition: form-data; name="_method"
+
+PATCH
+------updateForm
+Content-Disposition: form-data; name="user_id"
+
+1
+------updateForm
+Content-Disposition: form-data; name="faculty_id"
+
+1
+------updateForm
+Content-Disposition: form-data; name="title"
+
+Test タイトル
+------updateForm
+Content-Disposition: form-data; name="description"
+
+Test 本文
+------updateForm
+Content-Disposition: form-data; name="price"
+
+100
+------updateForm
+Content-Disposition: form-data; name="image"; filename="file.jpg"
+
+< {{ file }}
+------updateForm--
+
+
+
+
+### destroy
+# @prompt commodity_id
+DELETE /api/commodities/{{ commodity_id }} HTTP/1.1
+Host: {{ host }}
+Accept: application/json
