@@ -1,0 +1,11 @@
+### Get Token
+# @prompt code
+POST /oauth/token HTTP/1.1
+Host: {{ host }}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code
+&client_id={{ client_id }}
+&client_secret={{ client_secret }}
+&code={{ code }}
+&redirect_uri=http://localhost

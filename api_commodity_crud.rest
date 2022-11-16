@@ -4,7 +4,7 @@
 GET /api/commodities HTTP/1.1
 Host: {{ host }}
 Accept: application/json
-
+Authorization: Bearer {{ token }}
 
 ### show
 # @prompt commodity_id
@@ -52,11 +52,12 @@ Content-Disposition: form-data; name="image"; filename="file.jpg"
 
 ### update
 # @prompt file
-POST /api/commodities/9 HTTP/1.1
+POST /api/commodities/10 HTTP/1.1
 Host: {{ host }}
 Accept: application/json
 Content-Type: multipart/form-data; boundary=----updateForm
 # boundatyは送信するデータの目印
+Authorization: Bearer {{ token }}
 
 ------updateForm
 Content-Disposition: form-data; name="_method"

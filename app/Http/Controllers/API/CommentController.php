@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        return $this->authorizeResource(Comment::class, 'comment');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -33,7 +37,7 @@ class CommentController extends Controller
     {
         $comment = new Comment($request->all());
         // $comment->user_id = $request->user()->id;
-        $comment->user_id = 1;
+        $comment->user_id = $request->user()->id;
         // トランザクション開始
         DB::beginTransaction();
         try {

@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Storage;
 
 class CommodityController extends Controller
 {
+    public function __construct()
+    {
+        return $this->authorizeResource(Commodity::class, 'commodity');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +26,6 @@ class CommodityController extends Controller
     {
         //indexアクションにRequestクラスの引数を追加
         $params = $request->query();
-
         //検索用のスコープ(scopeSearch)を追加するので、スコープにリクエストパラメーターを渡す,with([user, faculty])とすることによりN+1問題解決
         $commodities = Commodity::search($params)->with(['user', 'faculty'])->latest()->paginate(5);
         $commodities->appends($params);

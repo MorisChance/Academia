@@ -20,30 +20,17 @@ class CommentPolicy
     {
         //
     }
+      // 省略
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
     public function view(User $user, Comment $comment)
     {
-        //
+        return true;
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
+    // 省略
     public function create(User $user)
-    {
-        //
+    {        return true;
     }
-
     /**
      * Determine whether the user can update the model.
      *

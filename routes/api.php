@@ -15,13 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::apiResource('commodities', CommodityController::class)
-    ->names('api.commodities');
+    ->middleware('auth:api');
 
 Route::apiResource('commodities.comments', CommentController::class)
+    ->middleware('auth:api')
     ->only(['store', 'show', 'update', 'destroy'])
     ->names('api.commodities.comments');

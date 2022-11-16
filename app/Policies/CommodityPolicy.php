@@ -10,7 +10,6 @@ use App\Models\Purchase;
 class CommodityPolicy
 {
     use HandlesAuthorization;
-
     /**
      * Create a new policy instance.
      *
@@ -19,6 +18,24 @@ class CommodityPolicy
     public function __construct()
     {
         //
+    }
+    // 省略
+    public function viewAny(User $user)
+    {
+        
+        return true;
+    }
+
+    //買う人と売る人が一致していなれば、購入ボタンを見せる
+    public function view(User $user, Commodity $commodity)
+    {
+        return !($user->id === $commodity->user_id);
+    }
+
+    // 省略
+    public function create(User $user)
+    {
+        return true;
     }
 
     /**
@@ -40,9 +57,4 @@ class CommodityPolicy
 
     }
     
-    //買う人と売る人が一致していなれば、購入ボタンを見せる
-    public function view(User $user, Commodity $commodity)
-    {
-        return !($user->id === $commodity->user_id);
-    }
 }
