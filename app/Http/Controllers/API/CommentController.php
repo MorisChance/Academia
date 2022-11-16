@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
@@ -56,9 +57,9 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(Commodity $commodity, Comment $comment)
     {
-        //
+        return response()->json([$commodity,$comment]);
     }
 
     /**
@@ -81,10 +82,10 @@ class CommentController extends Controller
      */
     public function update(CommentRequest $request, Commodity $commodity, Comment $comment)
     {
-        if ($request->user()->cannot('update', $comment)) {
-            return redirect()->route('commodities.show', $commodity)
-                ->withErrors('自分のコメント以外は更新できません');
-        }
+        // if ($request->user()->cannot('update', $comment)) {
+        //     return redirect()->route('commodities.show', $commodity)
+        //         ->withErrors('自分のコメント以外は更新できません');
+        // }
 
         $comment->fill($request->all());
 
@@ -101,9 +102,7 @@ class CommentController extends Controller
             DB::rollback();
             return back()->withInput()->withErrors($e->getMessage());
         }
-        // dd($comment);
-        return redirect()->route('commodities.show', $commodity)
-            ->with('notice', 'コメントを更新しました');
+    return response()->json($comment);
     }
 
     /**
@@ -127,7 +126,6 @@ class CommentController extends Controller
             return back()->withInput()->withErrors($e->getMessage());
         }
 
-        return redirect()->route('commodities.show', $commodity)
-            ->with('notice', 'コメントを削除しました');
+        return response('', 204);
     }
 }

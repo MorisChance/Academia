@@ -11,7 +11,7 @@ Accept: application/json
 
 ### commodities.comments.store
 # @prompt commodity_id
-commodities/api/commodities/{{ commodity_id }}/comments HTTP/1.1
+POST /api/commodities/{{ commodity_id }}/comments HTTP/1.1
 Host: {{ host }}
 Accept: application/json
 Content-Type: application/json
@@ -23,7 +23,7 @@ Content-Type: application/json
 
 
 ### commodities.comments.update
-# @prompt commoditie_id
+# @prompt commodity_id
 # @prompt comment_id
 PUT /api/commodities/{{ commodity_id }}/comments/{{ comment_id }} HTTP/1.1
 Host: {{ host }}
@@ -37,7 +37,7 @@ Content-Type: application/json
 
 
 ### commodities.comments.destroy
-# @prompt commoditie_id
+# @prompt commodity_id
 # @prompt comment_id
 DELETE /api/commodities/{{ commodity_id }}/comments/{{ comment_id }} HTTP/1.1
 Host: {{ host }}
