@@ -57,6 +57,7 @@ return [
             'key_file_path' => env('GOOGLE_CLOUD_KEY_FILE', null), // optional: /path/to/service-account.json
             'key_file' => [
                 'type' => env('GOOGLE_CLOUD_ACCOUNT_TYPE'),
+                'project_id' => env('GOOGLE_CLOUD_PROJECT_ID'), 
                 'private_key_id' => env('GOOGLE_CLOUD_PRIVATE_KEY_ID'),
                 'private_key' => env('GOOGLE_CLOUD_PRIVATE_KEY'),
                 'client_email' => env('GOOGLE_CLOUD_CLIENT_EMAIL'),
