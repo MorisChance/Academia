@@ -6,20 +6,21 @@
         <article class="mb-2">
             <h2 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-1 text-3xl md:text-4xl">
                 {{-- タイトル:{{ $commodity->title }}</h2> --}}
-            {{-- commmodityモデルにpublic function user()を定義しているため、リレーションを使用して$commodity->user->nameで表示する --}}
-            <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
-                <span
-                    class="text-red-400 font-bold">{{ date('Y-m-d H:i:s', strtotime('-1 day')) < $commodity->created_at ? 'NEW' : '' }}</span>
-                掲載日: {{ $commodity->created_at }}
-            </p>
-            {{-- 照会画面もimage_urlメソッドを使用するように修正します。 --}}
-            <img src="{{ $commodity->image_url }}" alt="" class="object-contain w-96 h-96 mb-4">
+                {{-- commmodityモデルにpublic function user()を定義しているため、リレーションを使用して$commodity->user->nameで表示する --}}
+                <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
+                    <span
+                        class="text-red-400 font-bold">{{ date('Y-m-d H:i:s', strtotime('-1 day')) < $commodity->created_at ? 'NEW' : '' }}</span>
+                    掲載日: {{ $commodity->created_at }}
+                </p>
+                {{-- 照会画面もimage_urlメソッドを使用するように修正します。 --}}
+                <img src="{{ $commodity->image_url }}" alt="" class="object-contain w-96 h-96 mb-4">
 
-            {{-- commmodityモデルにpublic function user()を定義しているため、リレーションを使用して$commodity->user->nameで表示する --}}
-            {{-- <h3 class="text-gray-700 text-3xl text-base">出品者: {{ $commodity->user->name }}</h3> --}}
-            <h3 class="text-gray-700 text-3xl text-base">値段: {!! nl2br(e($commodity->price)) !!}円</h3>
-            {{-- ブラウザ上で改行したいので、nl2br()で改行(\n)を<br>に置き換える<br>がエスケープされないように、{!! !!}で、エスケープを無効にする --}}
-            <h3 class="text-gray-700 text-3xl text-base">商品の詳細: {!! nl2br(e($commodity->description)) !!}</h3>
+                {{-- commmodityモデルにpublic function user()を定義しているため、リレーションを使用して$commodity->user->nameで表示する --}}
+                {{-- <h3 class="text-gray-700 text-3xl text-base">出品者: {{ $commodity->user->name }}</h3> --}}
+                <h3 class="text-gray-700 text-3xl text-base">値段: {!! nl2br(e($commodity->price)) !!}円</h3>
+                {{-- ブラウザ上で改行したいので、nl2br()で改行(\n)を<br>に置き換える<br>がエスケープされないように、{!! !!}で、エスケープを無効にする --}}
+                <h3 class="text-gray-700 text-3xl text-base">商品の詳細: {!! nl2br(e($commodity->description)) !!}</h3>
+                <hr class="divide-black">
         </article>
         {{-- ポリシーメッソドでは、showはviewで示す
             コントローラメソッド	ポリシー
@@ -33,7 +34,7 @@
         @can('view', $commodity)
             <div>
                 <a href="{{ route('commodities.purchases.create', $commodity) }}"
-                    class="relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-red-600 border-2 border-red-600 rounded-full hover:text-white group hover:bg-gray-50">
+                    class="relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-red-600 border-2 border-red-600 font-bold rounded-full hover:text-white group hover:bg-gray-50">
                     <span
                         class="absolute left-0 block w-full h-0 transition-all bg-red-600 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
                     <span

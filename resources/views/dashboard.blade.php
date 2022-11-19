@@ -9,14 +9,10 @@
                             <div class="border border-gray-900 px-2 h-7 leading-7 rounded-full">{{ $c->faculty->name }}
                             </div>
                         </div>
-                        <h2 class="text-lg text-gray-700 font-semibold">{{ $c->title }}
-                        </h2>
                         <p class="mt-4 text-md text-gray-600">
                             {{ Str::limit($c->description, 50, '...') }}
                         </p>
-                        <img src="{{ $c->image_url }}" alt="" class="mb-4">
-                        {{-- ブラウザ上で改行したいので、nl2br()で改行(\n)を<br>に置き換える<br>がエスケープされないように、{!! !!}で、エスケープを無効にする --}}
-                        <h3 class="text-gray-700 text-base">{!! nl2br(e($c->description)) !!}</h3>
+                        <img src="{{ $c->image_url }}" alt="" class="object-contain w-96 h-96 mb-4">
                         <h3 class="text-gray-700 text-base">{!! nl2br(e($c->price)) !!}円</h3>
                         <div class="flex justify-end items-center">
                             <a href="{{ route('commodities.show', $c) }}"

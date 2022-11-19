@@ -426,19 +426,21 @@
                         class="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full md:w-2/5 p-8 md:p-10 lg:p-14 sm:rounded-lg md:rounded-none relative z-11">
                         <div class="max-w-md w-full space-y-8">
                             <div class="text-center text-white">
-                                    <h3 class="mt-6 text-2xl font-bold mb-6">
-                                        ログインは、こちら！！
-                                    </h3>
-                                    <div>
-                                        <a href="{{ route('login') }}" class="w-full flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600 hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">Login</a>
-                                    </div>
-                                    <p class="flex flex-col items-center font-bold justify-center mt-10 text-center text-md">
-                                        <span>新規アカウント作成</span>
-                                        <a href="{{ route('register') }}"
-                                            class="text-blue-500 text-1xl font-bold no-underline hover:underline cursor-pointer transition ease-in duration-300 underline decoration-solid">Sign
-                                        up</a>
-                                    </p>
+                                <h3 class="mt-6 text-2xl font-bold mb-6">
+                                    ログインは、こちら！！
+                                </h3>
+                                <div>
+                                    <a href="{{ route('login') }}"
+                                        class="w-full flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600 hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">Login</a>
                                 </div>
+                                <p
+                                    class="flex flex-col items-center font-bold justify-center mt-10 text-center text-md">
+                                    <span>新規アカウント作成</span>
+                                    <a href="{{ route('register') }}"
+                                        class="text-blue-500 text-1xl font-bold no-underline hover:underline cursor-pointer transition ease-in duration-300 underline decoration-solid">Sign
+                                        up</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

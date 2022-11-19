@@ -1405,14 +1405,14 @@ select {
 .w-3\/5 {
   width: 60%;
 }
+.w-96 {
+  width: 24rem;
+}
 .w-4\/5 {
   width: 80%;
 }
 .w-1\/5 {
   width: 20%;
-}
-.w-96 {
-  width: 24rem;
 }
 .min-w-0 {
   min-width: 0px;
