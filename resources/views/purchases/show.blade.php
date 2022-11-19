@@ -1,3 +1,3 @@
 <x-app-layout>
-<h1>お買い上げありがとうございます</h1>
+<div class="text-center text-4xl">お買い上げありがとうございます</div>
 </x-app-layout>

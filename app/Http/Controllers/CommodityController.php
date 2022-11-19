@@ -23,7 +23,7 @@ class CommodityController extends Controller
         $params = $request->query();
 
        //検索用のスコープ(scopeSearch)を追加するので、スコープにリクエストパラメーターを渡す,with([user, faculty])とすることによりN+1問題解決
-        $commodities = Commodity::search($params)->with(['user', 'faculty'])->latest()->paginate(5);
+        $commodities = Commodity::search($params)->with(['user', 'faculty'])->latest()->paginate(4);
         $commodities->appends($params);
         $faculties = Faculty::all();
         return view('commodities.index', compact('commodities', 'faculties'));
