@@ -5,7 +5,7 @@
         <x-validation-errors :errors="$errors" />
         <article class="mb-2">
             <h2 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-1 text-3xl md:text-4xl">
-                タイトル:{{ $commodity->title }}</h2>
+                {{-- タイトル:{{ $commodity->title }}</h2> --}}
             {{-- commmodityモデルにpublic function user()を定義しているため、リレーションを使用して$commodity->user->nameで表示する --}}
             <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
                 <span
@@ -13,13 +13,13 @@
                 掲載日: {{ $commodity->created_at }}
             </p>
             {{-- 照会画面もimage_urlメソッドを使用するように修正します。 --}}
-            <img src="{{ $commodity->image_url }}" alt="" class="mb-4">
+            <img src="{{ $commodity->image_url }}" alt="" class="object-contain w-96 h-96 mb-4">
 
+            {{-- commmodityモデルにpublic function user()を定義しているため、リレーションを使用して$commodity->user->nameで表示する --}}
+            {{-- <h3 class="text-gray-700 text-3xl text-base">出品者: {{ $commodity->user->name }}</h3> --}}
+            <h3 class="text-gray-700 text-3xl text-base">値段: {!! nl2br(e($commodity->price)) !!}円</h3>
             {{-- ブラウザ上で改行したいので、nl2br()で改行(\n)を<br>に置き換える<br>がエスケープされないように、{!! !!}で、エスケープを無効にする --}}
             <h3 class="text-gray-700 text-3xl text-base">商品の詳細: {!! nl2br(e($commodity->description)) !!}</h3>
-            {{-- commmodityモデルにpublic function user()を定義しているため、リレーションを使用して$commodity->user->nameで表示する --}}
-            <h3 class="text-gray-700 text-3xl text-base">出品者: {{ $commodity->user->name }}</h3>
-            <h3 class="text-gray-700 text-3xl text-base">値段: {!! nl2br(e($commodity->price)) !!}円</h3>
         </article>
         {{-- ポリシーメッソドでは、showはviewで示す
             コントローラメソッド	ポリシー
