@@ -29,6 +29,8 @@ class PurchaseController extends Controller
         try {
             // 登録
             $purchase->save();
+            //決済二重送信防止
+            $request->session()->regenerateToken();
             DB::commit();
         } catch (\Exception $e) {
             // トランザクション終了(失敗)

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container mx-auto w-4/5 my-8 px-4 py-4">
+    <div class="container mx-auto bg-slate-100 w-4/5 my-8 px-4 py-4">
         <div class="flex justify-between">
             <div class="w-1/5">
                 <h3 class="mb-3 text-gray-400 text-sm">検索条件</h3>
