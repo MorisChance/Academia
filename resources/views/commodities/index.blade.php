@@ -55,7 +55,7 @@
                                 以下は、商品の購入が空でなければ、SOLD OUT --}}
                                         @if (!$c->purchases->isEmpty())
                                             <div class="font-extrabold text-red-500 text-2xl">
-                                                SOLD OUT
+                                                SOLD
                                             </div>
                                         @else
                                             <div>
