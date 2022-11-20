@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //フェイクのユーザー作成
+        \App\Models\User::factory(10)->create();
         // \App\Models\User::factory(10)->create();
+        $this->call(FacultySeeder::class);
     }
 }
